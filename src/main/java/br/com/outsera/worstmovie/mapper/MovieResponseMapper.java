@@ -13,12 +13,12 @@ public class MovieResponseMapper {
 
     private final ProducerResponseMapper producerResponseMapper;
 
-    public List<MovieResponse> toMovieResponse(
+    public MovieResponse toMovieResponse(
             Map<String, List<Integer>> minYearMap, Map<String, List<Integer>> maxYearMap) {
 
-        return List.of(MovieResponse.builder()
+        return MovieResponse.builder()
                 .min(producerResponseMapper.minYearMapToProducerResponseList(minYearMap))
                 .max(producerResponseMapper.maxYearMapToProducerResponseList(maxYearMap))
-                .build());
+                .build();
     }
 }

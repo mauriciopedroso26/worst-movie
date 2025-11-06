@@ -17,7 +17,7 @@ public class MovieController {
     private final MovieService movieService;
 
     @GetMapping("/producers")
-    public ResponseEntity<List<MovieResponse>> getProducersByInterval() {
+    public ResponseEntity<MovieResponse> getProducersByInterval() {
         return ResponseEntity.status(HttpStatus.OK).body(movieService.getProducersByInterval());
     }
 }

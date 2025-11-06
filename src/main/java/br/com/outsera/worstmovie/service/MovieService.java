@@ -22,7 +22,7 @@ public class MovieService {
 
     private final MovieResponseMapper movieResponseMapper;
 
-    public List<MovieResponse> getProducersByInterval() {
+    public MovieResponse getProducersByInterval() {
 
         List<Movie> allByWinner = movieRepository.findAllByWinner(true);
 
@@ -43,12 +43,14 @@ public class MovieService {
             List<String> producersList = Arrays.stream(movie.getProducers().split(",|\\s+and\\s+")).toList();
 
             producersList.forEach(producer -> {
-                if (isFalse(yearMap.containsKey(producer))) {
-                    yearMap.put(producer.trim(), new ArrayList<>(List.of(movie.getRelease_year())));
+                String producerTrim = producer.trim();
+
+                if (isFalse(yearMap.containsKey(producerTrim))) {
+                    yearMap.put(producerTrim, new ArrayList<>(List.of(movie.getRelease_year())));
                 } else {
-                    List<Integer> producerYear = yearMap.get(producer);
+                    List<Integer> producerYear = yearMap.get(producerTrim);
                     producerYear.add(movie.getRelease_year());
-                    yearMap.put(producer.trim(), producerYear);
+                    yearMap.put(producerTrim, producerYear);
                 }
             });
         });
